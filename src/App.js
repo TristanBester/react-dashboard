@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Topbar from './components/topbar/Topbar'
+import Sidebar from './components/sidebar/Sidebar'
+import Home from './pages/home/Home'
+import './app.css'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import UserList from './pages/userList/UserList'
+import User from './pages/user/User'
+import NewUser from './pages/newUser/NewUser'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Topbar />
+      <div className='container'>
+        <Sidebar />
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/users'>
+            <UserList />
+          </Route>
+          <Route path='/user/:userId'>
+            <User />
+          </Route>
+          <Route path='/newUser'>
+            <NewUser />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
